@@ -1,41 +1,56 @@
 {
-  "title": "Leads Generator Input",
-  "type": "object",
-  "schemaVersion": 1,
-  "properties": {
-    "platforms": {
-      "title": "Platforms",
-      "type": "array",
-      "description": "Select platforms to generate leads from",
-      "editor": "select",
-      "items": {
-        "type": "string",
-        "enum": ["github", "reddit", "devto", "hackernews", "producthunt"]
-      },
-      "default": ["github", "devto", "hackernews"]
+    "title": "Lead Generator Input",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "platforms": {
+            "title": "Platforms to scrape",
+            "type": "array",
+            "description": "Select platforms to collect leads from",
+            "default": ["github", "devto", "reddit", "hackernews"],
+            "editor": "multiselect",
+            "items": {
+                "type": "string",
+                "enum": ["github", "devto", "reddit", "hackernews", "producthunt"]
+            }
+        },
+        "keywords": {
+            "title": "Keywords",
+            "type": "array",
+            "description": "Keywords to search for (e.g., 'startup', 'founder', 'developer', 'machine learning')",
+            "default": ["startup", "founder", "developer"],
+            "editor": "stringList"
+        },
+        "maxLeads": {
+            "title": "Maximum leads",
+            "type": "integer",
+            "description": "Maximum number of leads to collect",
+            "default": 500,
+            "minimum": 1,
+            "maximum": 10000
+        },
+        "leadType": {
+            "title": "Lead Type",
+            "type": "string",
+            "description": "Type of leads to target",
+            "default": "tech",
+            "enum": ["tech", "business", "general"],
+            "enumTitles": ["Tech/Developers", "Business/Founders", "General"]
+        },
+        "locations": {
+            "title": "Filter by Locations",
+            "type": "array",
+            "description": "Only include leads from these locations (e.g., 'San Francisco', 'New York', 'London', 'Remote'). Leave empty to include all locations.",
+            "default": [],
+            "editor": "stringList"
+        },
+        "excludeLocations": {
+            "title": "Exclude Locations",
+            "type": "array",
+            "description": "Exclude leads from these locations (e.g., 'India', 'China'). Leave empty to not exclude any.",
+            "default": [],
+            "editor": "stringList"
+        }
     },
-    "keywords": {
-      "title": "Keywords",
-      "type": "array",
-      "description": "Keywords to find your target audience (e.g., 'startup', 'founder', 'SaaS')",
-      "editor": "stringList",
-      "default": ["startup", "founder", "developer"]
-    },
-    "maxLeads": {
-      "title": "Maximum Leads",
-      "type": "integer",
-      "description": "Maximum number of leads to collect",
-      "default": 500,
-      "minimum": 1,
-      "maximum": 10000
-    },
-    "leadType": {
-      "title": "Lead Type",
-      "type": "string",
-      "description": "Type of leads to focus on",
-      "enum": ["tech", "business", "general"],
-      "default": "tech"
-    }
-  },
-  "required": ["platforms", "keywords"]
+    "required": ["platforms", "keywords"]
 }
