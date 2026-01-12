@@ -1,8 +1,8 @@
 {
+  "actorOutputSchemaVersion": 1,
   "title": "Lead Data Output",
   "type": "object",
   "description": "Structured lead information from various platforms",
-  "schemaVersion": 1,
   "properties": {
     "lead_id": {
       "type": "string",
@@ -61,23 +61,24 @@
       "type": "object",
       "description": "Links to other social profiles",
       "properties": {
-        "github": {"type": "string"},
-        "twitter": {"type": "string"},
-        "linkedin": {"type": "string"}
-      }
+        "github": { "type": "string" },
+        "twitter": { "type": "string" },
+        "linkedin": { "type": "string" }
+      },
+      "additionalProperties": false
     },
     "metadata": {
       "type": "object",
       "description": "Platform-specific metadata",
       "properties": {
-        "followers": {"type": "number"},
-        "following": {"type": "number"},
-        "public_repos": {"type": "number"},
-        "karma": {"type": "number"},
-        "points": {"type": "number"},
-        "comments": {"type": "number"},
-        "tags": {"type": "array", "items": {"type": "string"}},
-        "created_at": {"type": "string", "format": "date-time"}
+        "followers": { "type": "number" },
+        "following": { "type": "number" },
+        "public_repos": { "type": "number" },
+        "karma": { "type": "number" },
+        "points": { "type": "number" },
+        "comments": { "type": "number" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "created_at": { "type": "string", "format": "date-time" }
       }
     },
     "lead_score": {
@@ -99,5 +100,6 @@
       "example": "2026-01-12T05:30:00.000Z"
     }
   },
-  "required": ["lead_id", "source", "profile_url", "lead_score", "scraped_at"]
+  "required": ["lead_id", "source", "profile_url", "lead_score", "scraped_at"],
+  "additionalProperties": false
 }
