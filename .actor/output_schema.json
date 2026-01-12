@@ -71,21 +71,21 @@
       "template": "image"
     },
     "social_links": {
-      "type": "object",
+      "type": "string",
       "title": "Social Links",
-      "description": "Social media profiles",
+      "description": "Social media profiles (JSON)",
       "template": "json"
     },
     "lead_score": {
-      "type": "integer",
+      "type": "string",
       "title": "Lead Score",
       "description": "Quality score from 1-10",
       "template": "plain"
     },
     "metadata": {
-      "type": "object",
+      "type": "string",
       "title": "Metadata",
-      "description": "Additional platform-specific data",
+      "description": "Additional platform-specific data (JSON)",
       "template": "json"
     },
     "keyword": {
