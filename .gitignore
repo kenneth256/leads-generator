@@ -1,4 +1,7 @@
-storage
-node_modules
-.venv
+node_modules/
+apify_storage/
+storage/
 .env
+.DS_Store
+dist/
+*.log
