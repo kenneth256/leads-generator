@@ -1,88 +1,56 @@
 {
-  "actorOutputSchemaVersion": 1,
-  "title": "Lead Data Output",
-  "type": "object",
-  "description": "Structured lead information from various platforms",
-  "properties": {
-    "lead_id": {
-      "type": "string",
-      "title": "Lead ID",
-      "description": "Unique identifier for the lead"
+    "title": "Lead Generator Input",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "platforms": {
+            "title": "Platforms to scrape",
+            "type": "array",
+            "description": "Select platforms to collect leads from",
+            "default": ["github", "devto", "reddit", "hackernews"],
+            "editor": "multiselect",
+            "items": {
+                "type": "string",
+                "enum": ["github", "devto", "reddit", "hackernews", "producthunt"]
+            }
+        },
+        "keywords": {
+            "title": "Keywords",
+            "type": "array",
+            "description": "Keywords to search for (e.g., 'startup', 'founder', 'developer', 'machine learning')",
+            "default": ["startup", "founder", "developer"],
+            "editor": "stringList"
+        },
+        "maxLeads": {
+            "title": "Maximum leads",
+            "type": "integer",
+            "description": "Maximum number of leads to collect",
+            "default": 500,
+            "minimum": 1,
+            "maximum": 10000
+        },
+        "leadType": {
+            "title": "Lead Type",
+            "type": "string",
+            "description": "Type of leads to target",
+            "default": "tech",
+            "enum": ["tech", "business", "general"],
+            "enumTitles": ["Tech/Developers", "Business/Founders", "General"]
+        },
+        "locations": {
+            "title": "Filter by Locations",
+            "type": "array",
+            "description": "Only include leads from these locations (e.g., 'San Francisco', 'New York', 'London', 'Remote'). Leave empty to include all locations.",
+            "default": [],
+            "editor": "stringList"
+        },
+        "excludeLocations": {
+            "title": "Exclude Locations",
+            "type": "array",
+            "description": "Exclude leads from these locations (e.g., 'India', 'China'). Leave empty to not exclude any.",
+            "default": [],
+            "editor": "stringList"
+        }
     },
-    "source": {
-      "type": "string",
-      "title": "Source Platform",
-      "description": "Platform where the lead was found"
-    },
-    "name": {
-      "type": "string",
-      "title": "Name",
-      "description": "Full name or display name"
-    },
-    "username": {
-      "type": "string",
-      "title": "Username",
-      "description": "Platform username"
-    },
-    "profile_url": {
-      "type": "string",
-      "title": "Profile URL",
-      "description": "URL to the profile page"
-    },
-    "email": {
-      "type": "string",
-      "title": "Email",
-      "description": "Email address (when available)"
-    },
-    "bio": {
-      "type": "string",
-      "title": "Bio",
-      "description": "Biography or description"
-    },
-    "company": {
-      "type": "string",
-      "title": "Company",
-      "description": "Company name"
-    },
-    "location": {
-      "type": "string",
-      "title": "Location",
-      "description": "Geographic location"
-    },
-    "website": {
-      "type": "string",
-      "title": "Website",
-      "description": "Personal or company website"
-    },
-    "avatar_url": {
-      "type": "string",
-      "title": "Avatar URL",
-      "description": "Profile picture URL"
-    },
-    "social_links": {
-      "type": "object",
-      "title": "Social Links",
-      "description": "Links to other social profiles"
-    },
-    "metadata": {
-      "type": "object",
-      "title": "Metadata",
-      "description": "Platform-specific metadata"
-    },
-    "lead_score": {
-      "type": "number",
-      "title": "Lead Score",
-      "description": "Quality score from 1 to 10"
-    },
-    "keyword": {
-      "type": "string",
-      "title": "Keyword",
-      "description": "Search keyword that found this lead"
-    },
-    "scraped_at": {
-      "type": "string",
-      "title": "Scraped At",
-      "description": "Timestamp when the lead was collected"
-    }
-  }
+    "required": ["platforms", "keywords"]
 }
