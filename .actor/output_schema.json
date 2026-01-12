@@ -7,82 +7,98 @@
     "lead_id": {
       "type": "string",
       "title": "Lead ID",
-      "description": "Unique identifier for the lead"
+      "description": "Unique identifier for the lead",
+      "template": "plain"
     },
     "source": {
       "type": "string",
       "title": "Source Platform",
-      "description": "Platform where the lead was found"
+      "description": "Platform where the lead was found",
+      "template": "plain"
     },
     "name": {
       "type": "string",
       "title": "Name",
-      "description": "Lead's name or display name"
+      "description": "Lead's name or display name",
+      "template": "plain"
     },
     "username": {
       "type": "string",
       "title": "Username",
-      "description": "Platform username"
+      "description": "Platform username",
+      "template": "plain"
     },
     "email": {
       "type": "string",
       "title": "Email",
-      "description": "Email address (if available)"
+      "description": "Email address (if available)",
+      "template": "plain"
     },
     "profile_url": {
       "type": "string",
       "title": "Profile URL",
-      "description": "Link to profile"
+      "description": "Link to profile",
+      "template": "link"
     },
     "bio": {
       "type": "string",
       "title": "Bio",
-      "description": "User bio or description"
+      "description": "User bio or description",
+      "template": "plain"
     },
     "company": {
       "type": "string",
       "title": "Company",
-      "description": "Company name"
+      "description": "Company name",
+      "template": "plain"
     },
     "location": {
       "type": "string",
       "title": "Location",
-      "description": "Geographic location"
+      "description": "Geographic location",
+      "template": "plain"
     },
     "website": {
       "type": "string",
       "title": "Website",
-      "description": "Personal or company website"
+      "description": "Personal or company website",
+      "template": "link"
     },
     "avatar_url": {
       "type": "string",
       "title": "Avatar URL",
-      "description": "Profile picture URL"
+      "description": "Profile picture URL",
+      "template": "image"
     },
     "social_links": {
       "type": "object",
       "title": "Social Links",
-      "description": "Social media profiles"
+      "description": "Social media profiles",
+      "template": "json"
     },
     "lead_score": {
       "type": "integer",
       "title": "Lead Score",
-      "description": "Quality score from 1-10"
+      "description": "Quality score from 1-10",
+      "template": "plain"
     },
     "metadata": {
       "type": "object",
       "title": "Metadata",
-      "description": "Additional platform-specific data"
+      "description": "Additional platform-specific data",
+      "template": "json"
     },
     "keyword": {
       "type": "string",
       "title": "Keyword",
-      "description": "Search keyword used"
+      "description": "Search keyword used",
+      "template": "plain"
     },
     "scraped_at": {
       "type": "string",
       "title": "Scraped At",
-      "description": "Timestamp of data collection"
+      "description": "Timestamp of data collection",
+      "template": "plain"
     }
   }
 }
