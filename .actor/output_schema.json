@@ -1,106 +1,87 @@
 {
   "actorOutputSchemaVersion": 1,
-  "title": "Lead Data Output",
-  "type": "object",
-  "schemaVersion": 1,
-  "description": "Structured lead information from various platforms",
-  "properties": {
+  "title": "Leads",
+  "description": "B2B leads from multiple platforms",
+  "fields": {
     "lead_id": {
       "type": "string",
       "title": "Lead ID",
-      "description": "Unique identifier for the lead",
-      "editor": "textfield"
+      "description": "Unique identifier for the lead"
     },
     "source": {
       "type": "string",
       "title": "Source Platform",
-      "description": "Platform where the lead was found",
-      "editor": "select",
-      "enum": ["github", "reddit", "devto", "hackernews", "producthunt"]
+      "description": "Platform where the lead was found"
     },
     "name": {
       "type": "string",
       "title": "Name",
-      "description": "Full name or display name",
-      "editor": "textfield"
+      "description": "Lead's name or display name"
     },
     "username": {
       "type": "string",
       "title": "Username",
-      "description": "Platform username",
-      "editor": "textfield"
-    },
-    "profile_url": {
-      "type": "string",
-      "title": "Profile URL",
-      "description": "URL to the profile page",
-      "editor": "textfield"
+      "description": "Platform username"
     },
     "email": {
       "type": "string",
       "title": "Email",
-      "description": "Email address (when available)",
-      "editor": "textfield"
+      "description": "Email address (if available)"
+    },
+    "profile_url": {
+      "type": "string",
+      "title": "Profile URL",
+      "description": "Link to profile"
     },
     "bio": {
       "type": "string",
       "title": "Bio",
-      "description": "Biography or description",
-      "editor": "textfield"
+      "description": "User bio or description"
     },
     "company": {
       "type": "string",
       "title": "Company",
-      "description": "Company name",
-      "editor": "textfield"
+      "description": "Company name"
     },
     "location": {
       "type": "string",
       "title": "Location",
-      "description": "Geographic location",
-      "editor": "textfield"
+      "description": "Geographic location"
     },
     "website": {
       "type": "string",
       "title": "Website",
-      "description": "Personal or company website",
-      "editor": "textfield"
+      "description": "Personal or company website"
     },
     "avatar_url": {
       "type": "string",
       "title": "Avatar URL",
-      "description": "Profile picture URL",
-      "editor": "textfield"
+      "description": "Profile picture URL"
     },
     "social_links": {
       "type": "object",
       "title": "Social Links",
-      "description": "Links to other social profiles",
-      "editor": "json"
+      "description": "Social media profiles"
+    },
+    "lead_score": {
+      "type": "integer",
+      "title": "Lead Score",
+      "description": "Quality score from 1-10"
     },
     "metadata": {
       "type": "object",
       "title": "Metadata",
-      "description": "Platform-specific metadata",
-      "editor": "json"
-    },
-    "lead_score": {
-      "type": "number",
-      "title": "Lead Score",
-      "description": "Quality score from 1 to 10",
-      "editor": "number"
+      "description": "Additional platform-specific data"
     },
     "keyword": {
       "type": "string",
       "title": "Keyword",
-      "description": "Search keyword that found this lead",
-      "editor": "textfield"
+      "description": "Search keyword used"
     },
     "scraped_at": {
       "type": "string",
       "title": "Scraped At",
-      "description": "Timestamp when the lead was collected",
-      "editor": "textfield"
+      "description": "Timestamp of data collection"
     }
   }
 }
