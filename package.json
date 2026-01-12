@@ -1,0 +1,28 @@
+{
+  "name": "apify-leads-generator",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "B2B Lead generation actor for Apify",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "echo \"No tests yet\""
+  },
+  "keywords": [
+    "apify",
+    "leads",
+    "scraper",
+    "b2b",
+    "github",
+    "devto",
+    "reddit"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "apify": "^3.5.2",
+    "crawlee": "^3.15.3",
+    "dotenv": "^17.2.3",
+    "puppeteer": "^21.0.0"
+  }
+}
