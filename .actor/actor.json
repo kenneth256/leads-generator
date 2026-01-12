@@ -11,5 +11,44 @@
   "input": "./input_schema.json",
   "dockerfile": "./Dockerfile",
   "readme": "./README.md",
-  "categories": ["BUSINESS", "AUTOMATION", "MARKETING"]
+  "categories": ["BUSINESS", "AUTOMATION", "MARKETING"],
+    "storages": {
+        "dataset": {
+            "actorSpecification": 1,
+            "fields": {
+                "source": {
+                    "type": "string",
+                    "title": "Platform"
+                },
+                "keyword": {
+                    "type": "string",
+                    "title": "Keyword"
+                },
+                "content_type": {
+                    "type": "string",
+                    "title": "Type"
+                },
+                "url": {
+                    "type": "string",
+                    "title": "URL"
+                },
+                "text": {
+                    "type": "object",
+                    "title": "Text Content"
+                },
+                "metadata": {
+                    "type": "object",
+                    "title": "Metadata"
+                },
+                "media": {
+                    "type": "object",
+                    "title": "Media"
+                },
+                "scraped_at": {
+                    "type": "string",
+                    "title": "Scraped At"
+                }
+            }
+        }
+    }
 }
