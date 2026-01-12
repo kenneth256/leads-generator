@@ -1,8 +1,9 @@
 {
   "actorOutputSchemaVersion": 1,
   "title": "Leads",
+  "type": "object",
   "description": "B2B leads from multiple platforms",
-  "fields": {
+  "properties": {
     "lead_id": {
       "type": "string",
       "title": "Lead ID",
