@@ -1,36 +1,105 @@
 {
-  "actorOutputSchemaVersion": 1,
   "title": "Lead Data Output",
   "type": "object",
+  "schemaVersion": 1,
+  "description": "Structured lead information from various platforms",
   "properties": {
     "lead_id": {
-      "title": "Lead ID",
       "type": "string",
-      "template": "string"
+      "title": "Lead ID",
+      "description": "Unique identifier for the lead",
+      "editor": "textfield"
     },
     "source": {
-      "title": "Source",
       "type": "string",
-      "template": "string"
+      "title": "Source Platform",
+      "description": "Platform where the lead was found",
+      "editor": "select",
+      "enum": ["github", "reddit", "devto", "hackernews", "producthunt"]
+    },
+    "name": {
+      "type": "string",
+      "title": "Name",
+      "description": "Full name or display name",
+      "editor": "textfield"
+    },
+    "username": {
+      "type": "string",
+      "title": "Username",
+      "description": "Platform username",
+      "editor": "textfield"
     },
     "profile_url": {
-      "title": "Profile URL",
       "type": "string",
-      "template": "url"
+      "title": "Profile URL",
+      "description": "URL to the profile page",
+      "editor": "textfield"
+    },
+    "email": {
+      "type": "string",
+      "title": "Email",
+      "description": "Email address (when available)",
+      "editor": "textfield"
+    },
+    "bio": {
+      "type": "string",
+      "title": "Bio",
+      "description": "Biography or description",
+      "editor": "textfield"
+    },
+    "company": {
+      "type": "string",
+      "title": "Company",
+      "description": "Company name",
+      "editor": "textfield"
+    },
+    "location": {
+      "type": "string",
+      "title": "Location",
+      "description": "Geographic location",
+      "editor": "textfield"
+    },
+    "website": {
+      "type": "string",
+      "title": "Website",
+      "description": "Personal or company website",
+      "editor": "textfield"
+    },
+    "avatar_url": {
+      "type": "string",
+      "title": "Avatar URL",
+      "description": "Profile picture URL",
+      "editor": "textfield"
+    },
+    "social_links": {
+      "type": "object",
+      "title": "Social Links",
+      "description": "Links to other social profiles",
+      "editor": "json"
+    },
+    "metadata": {
+      "type": "object",
+      "title": "Metadata",
+      "description": "Platform-specific metadata",
+      "editor": "json"
     },
     "lead_score": {
-      "title": "Lead Score",
       "type": "number",
-      "template": "number",
-      "minimum": 1,
-      "maximum": 10
+      "title": "Lead Score",
+      "description": "Quality score from 1 to 10",
+      "editor": "number"
+    },
+    "keyword": {
+      "type": "string",
+      "title": "Keyword",
+      "description": "Search keyword that found this lead",
+      "editor": "textfield"
     },
     "scraped_at": {
-      "title": "Scraped At",
       "type": "string",
-      "format": "date-time",
-      "template": "dateTime"
+      "title": "Scraped At",
+      "description": "Timestamp when the lead was collected",
+      "editor": "textfield"
     }
-  },
-  "required": ["lead_id", "source", "profile_url", "lead_score", "scraped_at"]
+  }
 }
