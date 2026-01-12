@@ -1,4 +1,5 @@
 {
+  "actorOutputSchemaVersion": 1,
   "title": "Lead Data Output",
   "type": "object",
   "schemaVersion": 1,
