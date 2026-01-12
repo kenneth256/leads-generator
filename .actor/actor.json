@@ -4,10 +4,9 @@
   "title": "Multi-Platform Leads Generator",
   "description": "Generate high-quality B2B leads from GitHub, Reddit, Dev.to, HackerNews, and Product Hunt. Perfect for finding developers, founders, and tech professionals.",
   "version": "1.0.0",
-  "output": "./output_schema.json",
-  "meta": {
-    "templateId": "typescript-puppeteer"
-  },
+   "meta": {
+        "templateId": "js-start"
+    },
   "input": "./input_schema.json",
   "dockerfile": "./Dockerfile",
   "readme": "./README.md",
@@ -52,3 +51,6 @@
         }
     }
 }
+
+
+

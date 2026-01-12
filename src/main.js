@@ -489,3 +489,5 @@ function calculateLeadScore(user) {
 
     return Math.min(score, 10);
 }
+
+// "output": "./output_schema.json",
