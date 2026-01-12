@@ -8,7 +8,7 @@
             "type": "array",
             "description": "Select platforms to collect leads from",
             "default": ["github", "devto", "reddit", "hackernews"],
-            "editor": "multiselect",
+            "editor": "select",
             "items": {
                 "type": "string",
                 "enum": ["github", "devto", "reddit", "hackernews", "producthunt"]
