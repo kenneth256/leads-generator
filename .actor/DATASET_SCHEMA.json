@@ -1,0 +1,84 @@
+{
+  "title": "Leads",
+  "type": "object",
+  "properties": {
+    "lead_id": {
+      "title": "Lead ID",
+      "type": "string",
+      "description": "Unique identifier for the lead"
+    },
+    "source": {
+      "title": "Source Platform",
+      "type": "string",
+      "description": "Platform where the lead was found",
+      "enum": ["github", "reddit", "devto", "hackernews", "producthunt"]
+    },
+    "name": {
+      "title": "Name",
+      "type": "string",
+      "description": "Lead's name or display name"
+    },
+    "username": {
+      "title": "Username",
+      "type": "string",
+      "description": "Platform username"
+    },
+    "email": {
+      "title": "Email",
+      "type": "string",
+      "description": "Email address (if available)"
+    },
+    "profile_url": {
+      "title": "Profile URL",
+      "type": "string",
+      "description": "Link to profile"
+    },
+    "bio": {
+      "title": "Bio",
+      "type": "string",
+      "description": "User bio or description"
+    },
+    "company": {
+      "title": "Company",
+      "type": "string",
+      "description": "Company name"
+    },
+    "location": {
+      "title": "Location",
+      "type": "string",
+      "description": "Geographic location"
+    },
+    "website": {
+      "title": "Website",
+      "type": "string",
+      "description": "Personal or company website"
+    },
+    "social_links": {
+      "title": "Social Links",
+      "type": "object",
+      "description": "Social media profiles"
+    },
+    "lead_score": {
+      "title": "Lead Score",
+      "type": "integer",
+      "description": "Quality score from 1-10",
+      "minimum": 1,
+      "maximum": 10
+    },
+    "metadata": {
+      "title": "Metadata",
+      "type": "object",
+      "description": "Additional platform-specific data"
+    },
+    "keyword": {
+      "title": "Keyword",
+      "type": "string",
+      "description": "Search keyword used"
+    },
+    "scraped_at": {
+      "title": "Scraped At",
+      "type": "string",
+      "description": "Timestamp of data collection"
+    }
+  }
+}
