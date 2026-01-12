@@ -11,8 +11,20 @@ const platforms = (input && input.platforms) || ['github', 'devto', 'reddit', 'h
 const keywords = (input && input.keywords) || ['startup', 'founder', 'developer'];
 const maxLeads = (input && input.maxLeads) || 500;
 const leadType = (input && input.leadType) || 'tech'; // 'tech', 'business', 'general'
+const locations = (input && input.locations) || []; // Filter by locations
+const excludeLocations = (input && input.excludeLocations) || []; // Exclude locations
 
-
+console.log(`🚀 Starting Lead Generation`);
+console.log(`📊 Platforms: ${platforms.join(', ')}`);
+console.log(`🔍 Keywords: ${keywords.join(', ')}`);
+console.log(`🎯 Target: ${maxLeads} leads`);
+console.log(`📝 Lead Type: ${leadType}`);
+if (locations.length > 0) {
+    console.log(`📍 Location Filter: ${locations.join(', ')}`);
+}
+if (excludeLocations.length > 0) {
+    console.log(`🚫 Exclude Locations: ${excludeLocations.join(', ')}`);
+}
 
 // Build starting URLs
 const startUrls = [];
@@ -21,7 +33,7 @@ for (const platform of platforms) {
     for (const keyword of keywords) {
         if (platform === 'github') {
             startUrls.push({
-                url: `https://api.github.com/search/users?q=${encodeURIComponent(keyword)}&per_page=100`,
+                url: `https://api.github.com/search/users?q=${encodeURIComponent(keyword)}${locations.length > 0 ? '+location:' + locations.map(loc => encodeURIComponent(loc)).join('+') : ''}&per_page=100`,
                 userData: { platform: 'github', keyword, type: 'users' },
             });
         } else if (platform === 'reddit') {
@@ -96,6 +108,33 @@ const crawler = new PuppeteerCrawler({
                 return true;
             });
 
+            // Filter by location
+            if (locations.length > 0 || excludeLocations.length > 0) {
+                leads = leads.filter(lead => {
+                    const leadLocation = (lead.location || '').toLowerCase();
+                    
+                    // If location filter is set, lead must match at least one location
+                    if (locations.length > 0) {
+                        const matchesLocation = locations.some(loc => 
+                            leadLocation.includes(loc.toLowerCase())
+                        );
+                        if (!matchesLocation) return false;
+                    }
+                    
+                    // If exclude locations is set, lead must not match any excluded location
+                    if (excludeLocations.length > 0) {
+                        const matchesExcluded = excludeLocations.some(loc => 
+                            leadLocation.includes(loc.toLowerCase())
+                        );
+                        if (matchesExcluded) return false;
+                    }
+                    
+                    return true;
+                });
+                
+                log.info(`After location filtering: ${leads.length} leads`);
+            }
+
             // Save leads to dataset
             for (const lead of leads) {
                 if (leadCount >= maxLeads) break;
@@ -154,7 +193,6 @@ async function scrapeGitHubUsers(page, log) {
             log.info(`✅ Found ${data.items.length} GitHub users`);
 
             for (const user of data.items) {
-                // Fetch user details
                 const lead = {
                     lead_id: `github_${user.id}`,
                     source: 'github',
@@ -165,7 +203,7 @@ async function scrapeGitHubUsers(page, log) {
                     bio: user.bio || '',
                     company: user.company || '',
                     location: user.location || '',
-                    email: user.email || '', // Usually empty unless public
+                    email: user.email || '',
                     website: user.blog || '',
                     social_links: {
                         github: user.html_url,
@@ -216,12 +254,22 @@ async function scrapeRedditLeads(page, log) {
                 const lead = {
                     lead_id: `reddit_${post.author}_${post.id}`,
                     source: 'reddit',
+                    name: post.author,
                     username: post.author,
                     profile_url: `https://reddit.com/user/${post.author}`,
-                    post_title: post.title,
-                    post_url: `https://reddit.com${post.permalink}`,
-                    subreddit: post.subreddit,
+                    bio: '',
+                    company: '',
+                    location: '',
+                    email: '',
+                    website: '',
+                    avatar_url: '',
+                    social_links: {
+                        reddit: `https://reddit.com/user/${post.author}`,
+                    },
                     metadata: {
+                        post_title: post.title,
+                        post_url: `https://reddit.com${post.permalink}`,
+                        subreddit: post.subreddit,
                         karma: post.score,
                         comments: post.num_comments,
                         created: new Date(post.created_utc * 1000).toISOString(),
@@ -272,8 +320,17 @@ async function scrapeDevToLeads(page, log) {
                         name: authorName,
                         username: username,
                         profile_url: authorUrl.startsWith('http') ? authorUrl : `https://dev.to${authorUrl}`,
-                        article_title: titleEl?.textContent?.trim() || '',
+                        bio: '',
+                        company: '',
+                        location: '',
+                        email: '',
+                        website: '',
+                        avatar_url: '',
+                        social_links: {
+                            devto: authorUrl.startsWith('http') ? authorUrl : `https://dev.to${authorUrl}`,
+                        },
                         metadata: {
+                            article_title: titleEl?.textContent?.trim() || '',
                             tags: tags,
                         },
                         lead_score: tags.length > 3 ? 7 : 5,
@@ -316,11 +373,21 @@ async function scrapeHackerNewsLeads(page, log) {
                 const lead = {
                     lead_id: `hn_${hit.author}_${hit.objectID}`,
                     source: 'hackernews',
+                    name: hit.author,
                     username: hit.author,
                     profile_url: `https://news.ycombinator.com/user?id=${hit.author}`,
-                    post_title: hit.title || hit.story_title,
-                    post_url: `https://news.ycombinator.com/item?id=${hit.objectID}`,
+                    bio: '',
+                    company: '',
+                    location: '',
+                    email: '',
+                    website: '',
+                    avatar_url: '',
+                    social_links: {
+                        hackernews: `https://news.ycombinator.com/user?id=${hit.author}`,
+                    },
                     metadata: {
+                        post_title: hit.title || hit.story_title,
+                        post_url: `https://news.ycombinator.com/item?id=${hit.objectID}`,
                         points: hit.points || 0,
                         comments: hit.num_comments || 0,
                         created: hit.created_at,
@@ -365,9 +432,19 @@ async function scrapeProductHuntLeads(page, log) {
                         lead_id: `ph_${index}_${Date.now()}`,
                         source: 'producthunt',
                         name: makerName,
+                        username: makerName,
                         profile_url: makerUrl,
-                        product_title: titleEl?.textContent?.trim() || '',
+                        bio: '',
+                        company: '',
+                        location: '',
+                        email: '',
+                        website: '',
+                        avatar_url: '',
+                        social_links: {
+                            producthunt: makerUrl,
+                        },
                         metadata: {
+                            product_title: titleEl?.textContent?.trim() || '',
                             platform: 'producthunt',
                         },
                         lead_score: 7,
@@ -410,5 +487,5 @@ function calculateLeadScore(user) {
     if (user.email) score += 2;
     if (user.location) score += 1;
 
-    return Math.min(score, 10); // Cap at 10
+    return Math.min(score, 10);
 }
